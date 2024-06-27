@@ -1,3 +1,8 @@
+/**
+ *
+ * @class
+ * @classdesc: Get Currency name & code
+ */
 export default class Currency {
   constructor(code, name) {
     this._code = code;
@@ -8,22 +13,19 @@ export default class Currency {
     return this._code;
   }
 
-  set code(value) {
-    if (typeof value !== 'string') throw new TypeError('Code must be a string');
-    this._code = value;
+  set code(newCode) {
+    this._code = newCode;
   }
 
   get name() {
     return this._name;
   }
 
-  set name(value) {
-    if (typeof value !== 'string') throw new TypeError('Name must be a string');
-    this._name = value;
+  set name(newName) {
+    this._name = newName;
   }
 
   displayFullCurrency() {
     return `${this._name} (${this._code})`;
   }
 }
-

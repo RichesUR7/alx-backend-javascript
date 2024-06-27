@@ -1,13 +1,32 @@
-import Car from './10-car.js';
+const cloneCarSymbol = Symbol('cloneCar');
 
-export default class EVCar extends Car {
-  constructor(brand, motor, color, range) {
-    super(brand, motor, color);
-    this._range = range;
+/**
+ *
+ * @class
+ * @classdesc define a car class
+ */
+export default class Car {
+  /**
+   * @param {String} brand
+   * @param {String} motor
+   * @param {String} color
+   */
+  constructor(brand, motor, color) {
+    this._brand = brand;
+    this._motor = motor;
+    this._color = color;
+
+    /* Define the Symbol property as non-enumerable */
+    Object.defineProperty(this, cloneCarSymbol, {
+      value: true,
+      enumerable: false,
+    });
   }
 
   cloneCar() {
-    return new this.constructor(this._brand, this._motor, this._color, this._range);
+    if (this[cloneCarSymbol] === true) {
+      return new this.constructor();
+    }
+    return null;
   }
 }
-

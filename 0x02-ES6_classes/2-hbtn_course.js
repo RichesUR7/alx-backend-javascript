@@ -1,44 +1,61 @@
+/**
+ *
+ * @class
+ * @classdesc HolbertonCourse holds basic operations for students
+ */
+
+function checkType(value, expectedType, errorMessage) {
+  const typeChecks = {
+    string: typeof value === 'string',
+    number: typeof value === 'number',
+  };
+
+  if (!typeChecks[expectedType]) {
+    throw new TypeError(errorMessage);
+  }
+}
+
+function checkArrayType(value, errorMessage) {
+  if (!Array.isArray(value) || value.some((item) => typeof item !== 'string')) {
+    throw new TypeError(errorMessage);
+  }
+}
+
 export default class HolbertonCourse {
   constructor(name, length, students) {
+    checkType(name, 'string', 'Name must be a string');
+    checkType(length, 'number', 'Length must be a number');
+    checkArrayType(students, 'Students must be an array of strings');
+
     this._name = name;
     this._length = length;
     this._students = students;
-    this.validateAttributes();
-  }
-
-  validateAttributes() {
-    if (typeof this._name !== 'string') throw new TypeError('Name must be a string');
-    if (typeof this._length !== 'number') throw new TypeError('Length must be a number');
-    if (!Array.isArray(this._students)) throw new TypeError('Students must be an array');
-    if (!this._students.every(student => typeof student === 'string')) throw new TypeError('Students must be an array of strings');
   }
 
   get name() {
     return this._name;
   }
 
-  set name(value) {
-    if (typeof value !== 'string') throw new TypeError('Name must be a string');
-    this._name = value;
+  set name(newName) {
+    checkType(newName, 'string', 'Name must be a string');
+    this._name = newName;
   }
 
   get length() {
     return this._length;
   }
 
-  set length(value) {
-    if (typeof value !== 'number') throw new TypeError('Length must be a number');
-    this._length = value;
+  set length(newLength) {
+    checkType(newLength, 'number', 'Length must be a number');
+    this._length = newLength;
   }
 
   get students() {
     return this._students;
   }
 
-  set students(value) {
-    if (!Array.isArray(value)) throw new TypeError('Students must be an array');
-    if (!value.every(student => typeof student === 'string')) throw new TypeError('Students must be an array of strings');
-    this._students = value;
+  set students(newStudents) {
+    checkArrayType(newStudents, 'Students must be an array of strings');
+    this._students = newStudents;
   }
 }
-
