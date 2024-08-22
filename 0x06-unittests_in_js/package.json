@@ -1,0 +1,33 @@
+{
+  "name": "unittests_in_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
+    "lint-all": "./node_modules/.bin/eslint [0-9]*.js [0-9]*.test.js",
+    "check-lint": "npm run lint -- [0-9]*.js [0-9]*.test.js",
+    "test": "mocha --require babel-register --exit",
+    "test_all": "mocha --require babel-register --exit *.test.js 8-api/*.test.js 9-api/*.test.js 10-api/*.test.js",
+    "dev": "nodemon --exec babel-node --presets babel-preset-env ./full_server/server.js ./database.csv"
+  },
+  "author": "Mohannad",
+  "license": "ISC",
+  "dependencies": {
+    "chai-http": "^4.3.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.22",
+    "request": "^2.88.0",
+    "sinon": "^7.5.0"
+  }
+}
